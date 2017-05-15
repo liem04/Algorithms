@@ -240,7 +240,7 @@ function createMatrixInput($n)
     fclose($inputFile);
 }
 
-createMatrixInput(300);
+createMatrixInput(100);
 list ($a, $b) = readMatrixFromFile('input.txt');
 
 $timeStart = microtime(true);

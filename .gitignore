@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/Algorithms.iml
+.idea/modules.xml
+.idea/workspace.xml
+Matric/input.txt
+Matric/simple.txt
+Matric/strassen.txt
