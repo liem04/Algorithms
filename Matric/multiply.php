@@ -61,10 +61,10 @@ function strassenMultiply(array $a, array $b): array
     $p6 = strassenMultiply($s7, $s8);
     $p7 = strassenMultiply($s9, $s10);
 
-    $c11 = sumMatrix(subtractMatrix(sumMatrix($p5, $p4), $p2), $p6);
-    $c12 = sumMatrix($p1, $p2);
-    $c21 = sumMatrix($p3, $p4);
-    $c22 = subtractMatrix(subtractMatrix(sumMatrix($p5, $p1), $p3), $p7);
+    $c11 = sumMatrix(subtractMatrix(sumMatrix($p5, $p4), $p2), $p6); //P5 + P4 - P2 + P6
+    $c12 = sumMatrix($p1, $p2); //P1 + P2
+    $c21 = sumMatrix($p3, $p4); //P3 + P4
+    $c22 = subtractMatrix(subtractMatrix(sumMatrix($p5, $p1), $p3), $p7); //P5 + P1 - P3 - P7
 
     return mergeMatrix($c11, $c12, $c21, $c22, count($a));
 }
@@ -130,7 +130,7 @@ function mergeMatrix(array $c11, array $c12, array $c21, array $c22, int $rows):
  * @param array $a
  * @return array
  */
-function getSubMatrix(array $a)
+function getSubMatrix(array $a): array
 {
     $a = makeOven($a);
     $a11 = [];
@@ -170,7 +170,7 @@ function makeOven(array $a): array
  * @param $filePath
  * @return array
  */
-function readMatrixFromFile($filePath)
+function readMatrixFromFile($filePath): array
 {
     $handle = fopen($filePath, 'r') or die('Unable to open file!');
     $row = 0;
@@ -211,7 +211,7 @@ function writeMatrixToFile(array $matrix, $time, $filePath)
  * @param int $n
  * @return array
  */
-function genMatrix(int $n)
+function genMatrix(int $n): array
 {
     $matrix = [];
     for ($i = 0; $i < $n; $i++) {
@@ -240,7 +240,7 @@ function createMatrixInput($n)
     fclose($inputFile);
 }
 
-createMatrixInput(100);
+createMatrixInput(300);
 list ($a, $b) = readMatrixFromFile('input.txt');
 
 $timeStart = microtime(true);
