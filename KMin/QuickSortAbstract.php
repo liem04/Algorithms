@@ -1,5 +1,4 @@
 <?php
-
 require_once 'SortAbstract.php';
 
 abstract class QuickSortAbstract extends SortAbstract
