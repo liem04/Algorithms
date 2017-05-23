@@ -8,19 +8,7 @@ namespace Algorithms\Sorting;
 class RandomizedSelect
 {
 
-    /**
-     * @var RandomizedQuickSort
-     */
-    protected $randomizedQuicksort;
-
-    /**
-     * RandomizedSelect constructor.
-     * @param RandomizedQuickSort $randomizedQuicksort
-     */
-    public function __construct(RandomizedQuickSort $randomizedQuicksort)
-    {
-        $this->ramdomizedQuicksort = $randomizedQuicksort;
-    }
+    use ArrayHelper;
 
     /**
      * RandomizedSelect constructor.
@@ -35,7 +23,7 @@ class RandomizedSelect
         if ($p === $r) {
             return $a[$p];
         }
-        $q = $this->ramdomizedQuicksort->partition($a, $p, $r);
+        $q = $this->randomizedPartition($a, $p, $r);
         $k = $q - $p + 1;
         if ($i === $k) {
             return $a[$q];
@@ -44,5 +32,27 @@ class RandomizedSelect
             return $this->solve($a, $p, $q - 1, $i);
         }
         return $this->solve($a, $q + 1, $r, $i - $k);
+    }
+
+    /**
+     * @param array $a
+     * @param int $p
+     * @param int $r
+     * @return int
+     */
+    protected function randomizedPartition(array &$a, int $p, int $r): int
+    {
+        $i = random_int($p, $r);
+        $this->exchange($a, $r, $i);
+        $x = $a[$r];
+        $i = $p - 1;
+        for ($j = $p; $j <= $r - 1; $j++) {
+            if ($a[$j] <= $x) {
+                $i++;
+                $this->exchange($a, $i, $j);
+            }
+        }
+        $this->exchange($a, $i + 1, $r);
+        return $i + 1;
     }
 }

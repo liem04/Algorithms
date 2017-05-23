@@ -1,11 +1,12 @@
 <?php
 
-use Algorithms\Sorting\MinHeap;
+use Algorithms\Sorting\InsertionSort;
+use Algorithms\Sorting\Select;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$a = [45, 55, 22, 4, 6];
-$minHeap = new MinHeap();
-$minHeap->buildMixHeap($a, count($a));
-array_shift($a);
-var_dump($a);
+$a = [2, 6, 3, 7, 9, 8, 1, 4, 5, 10];
+$k = 6;
+$select = new Select(new InsertionSort());
+$x = $select->solve($a, 0, count($a) - 1, $k);
+var_dump($x);

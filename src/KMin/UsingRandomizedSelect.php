@@ -21,7 +21,7 @@ class UsingRandomizedSelect implements KMinInterface
     public function solve(array $a, int $k): array
     {
         $kmin = [];
-        $randomizedSelect = new RandomizedSelect(new RandomizedQuickSort());
+        $randomizedSelect = new RandomizedSelect();
         for ($i = 1; $i <= $k; $i++)
         {
             $kmin[] = $randomizedSelect->solve($a, 0, count($a) - 1, $i);
