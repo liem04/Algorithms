@@ -1,5 +1,6 @@
 <?php
 
+use Algorithms\KMin\KMinInterface;
 use Algorithms\KMin\Reader\FileReader;
 use Algorithms\KMin\UsingHeapSort;
 use Algorithms\KMin\UsingMinHeap;
@@ -17,6 +18,11 @@ $methods = [
     'RandomizedSelect' => new UsingRandomizedSelect(),
     'Select          ' => new UsingSelect()
 ];
+
+/**
+ * @var string $name
+ * @var KMinInterface $method
+ */
 foreach ($methods as $name => $method) {
     $timeStart = microtime(true);
     $kmin = $method->solve($a, $k);
