@@ -52,7 +52,7 @@ class Select
             }
         }
         $i = $p - 1;
-        for ($j = $p; $j <= $r; $j++) {
+        for ($j = $p; $j <= $r - 1; $j++) {
             if ($a[$j] <= $x) {
                 $i++;
                 $this->exchange($a, $i, $j);
