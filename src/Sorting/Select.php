@@ -89,7 +89,6 @@ class Select
      */
     private function insertionSort(array &$a, int $p, int $r)
     {
-        echo 'Sort';
         for ($i = $p + 1; $i <= $r; $i++) {
             $key = $a[$i];
             $j = $i - 1;
