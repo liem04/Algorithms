@@ -5,7 +5,7 @@ namespace Algorithms\Sorting;
 /**
  * Class InsertionSort
  */
-class InsertionSort
+class InsertionSort extends SortAbstract
 {
     /**
      * @param array $a
