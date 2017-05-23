@@ -5,39 +5,10 @@ namespace Algorithms\Sorting;
 /**
  * Class HeapSort
  */
-class HeapSort
+class HeapSort extends Heap
 {
+
     use ArrayHelper;
-    
-    /**
-     * @param int $i
-     *
-     * @return int
-     */
-    private function parent(int $i): int
-    {
-        return ceil($i / 2) - 1;
-    }
-
-    /**
-     * @param int $i
-     *
-     * @return int
-     */
-    private function left(int $i): int
-    {
-        return 2 * $i + 1;
-    }
-
-    /**
-     * @param int $i
-     *
-     * @return int
-     */
-    private function right(int $i): int
-    {
-        return 2 * $i + 2;
-    }
 
     /**
      * @param array $a
