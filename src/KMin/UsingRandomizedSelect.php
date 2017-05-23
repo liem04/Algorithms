@@ -3,7 +3,6 @@
 namespace Algorithms\KMin;
 
 
-use Algorithms\Sorting\RandomizedQuickSort;
 use Algorithms\Sorting\RandomizedSelect;
 
 /**

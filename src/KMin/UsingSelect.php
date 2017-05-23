@@ -17,7 +17,7 @@ class UsingSelect implements KMinInterface
     public function solve(array $a, int $k): array
     {
         $kmin = [];
-        $select = new Select(new InsertionSort());
+        $select = new Select();
         for ($i = 1; $i <= $k; $i++)
         {
             $kmin[] = $select->solve($a, 0, count($a) - 1, $i);

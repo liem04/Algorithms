@@ -12,20 +12,6 @@ class Select
     use ArrayHelper;
 
     /**
-     * @var InsertionSort
-     */
-    private $insertionSort;
-
-    /**
-     * Select constructor.
-     * @param InsertionSort $insertionSort
-     */
-    public function __construct(InsertionSort $insertionSort)
-    {
-        $this->insertionSort = $insertionSort;
-    }
-
-    /**
      * @param array $a
      * @param int $p
      * @param int $r
@@ -35,7 +21,7 @@ class Select
     public function solve(array &$a, int $p, int $r, int $i)
     {
         if ($r - $p <= 5) {
-            $this->insertionSort->sort($a, $p, $r);
+            $this->sort($a, $p, $r);
             return $a[$p + $i - 1];
         }
         $x = $this->getMedianFive($a, $p, $r);
@@ -90,9 +76,28 @@ class Select
         for ($i = 0; $i < $groupNumber; $i++) {
             $startGroup = $p + $i * 5;
             $endGroup = (($i == $groupNumber - 1) ? $r : $startGroup + 4);
-            $this->insertionSort->sort($a, $startGroup, $endGroup);
+            $this->sort($a, $startGroup, $endGroup);
             $medians[] = $a[($startGroup + $endGroup) / 2];
         }
         return $this->solve($medians, 0, count($medians) - 1, count($medians) / 2);
+    }
+
+    /**
+     * @param array $a
+     * @param int $p
+     * @param int $r
+     */
+    public function sort(array &$a, int $p, int $r)
+    {
+        for ($i = $p + 1; $i <= $r; $i++) {
+            $key = $a[$i];
+            $j = $i - 1;
+
+            while ($j >= $p && $a[$j] > $key) {
+                $a[$j + 1] = $a[$j];
+                $j = $j - 1;
+            }
+            $a[$j + 1] = $key;
+        }
     }
 }
