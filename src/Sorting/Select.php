@@ -21,7 +21,7 @@ class Select
     public function solve(array &$a, int $p, int $r, int $i)
     {
         if ($r - $p <= 5) {
-            $this->sort($a, $p, $r);
+            $this->insertionSort($a, $p, $r);
             return $a[$p + $i - 1];
         }
         $x = $this->getMedianFive($a, $p, $r);
@@ -76,7 +76,7 @@ class Select
         for ($i = 0; $i < $groupNumber; $i++) {
             $startGroup = $p + $i * 5;
             $endGroup = (($i == $groupNumber - 1) ? $r : $startGroup + 4);
-            $this->sort($a, $startGroup, $endGroup);
+            $this->insertionSort($a, $startGroup, $endGroup);
             $medians[] = $a[($startGroup + $endGroup) / 2];
         }
         return $this->solve($medians, 0, count($medians) - 1, count($medians) / 2);
@@ -87,7 +87,7 @@ class Select
      * @param int $p
      * @param int $r
      */
-    private function sort(array &$a, int $p, int $r)
+    private function insertionSort(array &$a, int $p, int $r)
     {
         for ($i = $p + 1; $i <= $r; $i++) {
             $key = $a[$i];
