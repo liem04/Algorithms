@@ -24,7 +24,7 @@ class Select
             $this->insertionSort($a, $p, $r);
             return $a[$p + $i - 1];
         }
-        $x = $this->getMedianFive($a, $p, $r);
+        $x = $this->getMedianOfMedians($a, $p, $r);
         $q = $this->partition($a, $p, $r, $x);
         $k = $q - $p + 1;
         if ($i === $k) {
@@ -68,7 +68,7 @@ class Select
      * @param int $r
      * @return mixed
      */
-    private function getMedianFive(array $a, int $p, int $r)
+    private function getMedianOfMedians(array $a, int $p, int $r)
     {
         $size = $r - $p;
         $medians = [];
