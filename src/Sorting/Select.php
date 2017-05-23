@@ -43,7 +43,7 @@ class Select
      * @param int $x
      * @return int
      */
-    protected function partition(array &$a, int $p, int $r, int $x)
+    private function partition(array &$a, int $p, int $r, int $x)
     {
         for ($i = $p; $i <= $r; $i++) {
             if ($a[$i] === $x) {
@@ -87,7 +87,7 @@ class Select
      * @param int $p
      * @param int $r
      */
-    public function sort(array &$a, int $p, int $r)
+    private function sort(array &$a, int $p, int $r)
     {
         for ($i = $p + 1; $i <= $r; $i++) {
             $key = $a[$i];
