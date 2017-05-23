@@ -1,5 +1,5 @@
 <?php
-require_once 'SortAbstract.php';
+namespace Algorithms\Sorting;
 
 abstract class QuickSortAbstract extends SortAbstract
 {

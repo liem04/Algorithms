@@ -1,8 +1,10 @@
 <?php
-require_once 'InsertionSort.php';
+
+namespace Algorithms\Sorting;
 
 /**
  * Class Select
+ * @package Algorithms\Sorting
  */
 class Select
 {
@@ -21,21 +23,27 @@ class Select
         $this->insertionSort = $insertionSort;
     }
 
+    /**
+     * @param array $a
+     * @param int $p
+     * @param int $r
+     * @param int $i
+     * @return mixed
+     */
     public function solve(array &$a, int $p, int $r, int $i)
     {
         if ($r - $p <= 5) {
             $this->insertionSort->sort($a, $p, $r);
-            return $a[$i - 1];
+            return $a[$p + $i - 1];
         }
         $x = $this->getMedianFive($a, $p, $r);
         $q = $this->partition($a, $p, $r, $x);
-        $this->display($a);
         $k = $q - $p + 1;
         if ($i === $k) {
             return $a[$q];
         }
         if ($i < $k) {
-            return $this->solve($a, $p, $q - 1, $i);
+            return $this->solve($a, $p, $q -1 , $i);
         }
         return $this->solve($a, $q + 1, $r, $i - $k);
     }
@@ -52,6 +60,7 @@ class Select
         for ($i = $p; $i <= $r; $i++) {
             if ($a[$i] === $x) {
                 $this->exchange($a, $i, $r);
+                break;
             }
         }
         $i = $p - 1;
@@ -62,12 +71,7 @@ class Select
             }
         }
         $this->exchange($a, $i + 1, $r);
-        return $i + 1;
-    }
-
-    private function display(array $a)
-    {
-        echo implode(' ', $a) . PHP_EOL;
+        return $i;
     }
 
     /**
@@ -82,17 +86,23 @@ class Select
         $a[$j] = $tmp;
     }
 
+    /**
+     * @param array $a
+     * @param int $p
+     * @param int $r
+     * @return mixed
+     */
     private function getMedianFive(array $a, int $p, int $r)
     {
         $size = $r - $p;
         $medians = [];
         $groupNumber = ceil($size / 5);
         for ($i = 0; $i < $groupNumber; $i++) {
-            $startGroup = $i * 5;
-            $endGroup = (($i == $groupNumber - 1) ? $size - 1 : $i * 5 + 5);
+            $startGroup = $p + $i * 5;
+            $endGroup = (($i == $groupNumber - 1) ? $r : $startGroup + 4);
             $this->insertionSort->sort($a, $startGroup, $endGroup);
             $medians[] = $a[($startGroup + $endGroup) / 2];
         }
-        return $this->solve($medians, $p, count($medians) - 1, count($medians) / 2);
+        return $this->solve($medians, 0, count($medians) - 1, count($medians) / 2);
     }
 }

@@ -1,5 +1,6 @@
 <?php
-require_once 'RandomizedQuickSort.php';
+
+namespace Algorithms\Sorting;
 
 /**
  * Class RandomizedSelect

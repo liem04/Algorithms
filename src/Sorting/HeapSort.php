@@ -1,11 +1,13 @@
 <?php
-require_once 'SortAbstract.php';
+
+namespace Algorithms\Sorting;
 
 /**
  * Class HeapSort
  */
 class HeapSort extends SortAbstract
 {
+
     /**
      * @param int $i
      *

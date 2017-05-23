@@ -1,10 +1,11 @@
 <?php
-require_once 'QuickSortAbstract.php';
+
+namespace Algorithms\Sorting;
 
 /**
- * Class RandomizedQuickSort
+ * Class QuickSort
  */
-class RandomizedQuickSort extends QuickSortAbstract
+class QuickSort extends QuickSortAbstract
 {
     /**
      * @param array $a
@@ -14,8 +15,6 @@ class RandomizedQuickSort extends QuickSortAbstract
      */
     public function partition(array &$a, int $p, int $r)
     {
-        $i = random_int($p, $r);
-        $this->exChange($a, $r, $i);
         return $this->partitionPivotLast($a, $p, $r);
     }
 }

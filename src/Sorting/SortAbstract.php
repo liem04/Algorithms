@@ -1,5 +1,5 @@
 <?php
-
+namespace Algorithms\Sorting;
 /**
  * Class SortAbstract
  */
