@@ -1,8 +1,15 @@
 <?php
 namespace Algorithms\Sorting;
 
-abstract class QuickSortAbstract extends SortAbstract
+/**
+ * Class QuickSortAbstract
+ * @package Algorithms\Sorting
+ */
+abstract class QuickSortAbstract
 {
+
+    use ArrayHelper;
+
     /**
      * @param array $a
      * @param int $p

@@ -7,8 +7,10 @@ namespace Algorithms\Sorting;
  * Class MinHeap
  * @package Algorithms\Sorting
  */
-class MinHeap extends SortAbstract
+class MinHeap
 {
+
+    use ArrayHelper;
 
     /**
      * @param int $i

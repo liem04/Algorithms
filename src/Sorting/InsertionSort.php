@@ -5,8 +5,10 @@ namespace Algorithms\Sorting;
 /**
  * Class InsertionSort
  */
-class InsertionSort extends SortAbstract
+class InsertionSort
 {
+    use ArrayHelper;
+
     /**
      * @param array $a
      * @param int $p

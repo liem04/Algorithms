@@ -9,6 +9,8 @@ namespace Algorithms\Sorting;
 class Select
 {
 
+    use ArrayHelper;
+
     /**
      * @var InsertionSort
      */
@@ -72,18 +74,6 @@ class Select
         }
         $this->exchange($a, $i + 1, $r);
         return $i;
-    }
-
-    /**
-     * @param array $a
-     * @param int $i
-     * @param int $j
-     */
-    protected function exchange(array &$a, int $i, int $j)
-    {
-        $tmp = $a[$i];
-        $a[$i] = $a[$j];
-        $a[$j] = $tmp;
     }
 
     /**

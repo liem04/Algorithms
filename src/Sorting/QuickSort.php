@@ -7,6 +7,7 @@ namespace Algorithms\Sorting;
  */
 class QuickSort extends QuickSortAbstract
 {
+
     /**
      * @param array $a
      * @param int $p

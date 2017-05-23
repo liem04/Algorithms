@@ -3,15 +3,17 @@
 namespace Algorithms\KMin;
 
 
+use Algorithms\Sorting\ArrayHelper;
 use Algorithms\Sorting\MinHeap;
-use Algorithms\Sorting\SortAbstract;
 
 /**
  * Class UsingMinHeap
  * @package Algorithms\KMin
  */
-class UsingMinHeap extends SortAbstract implements KMinInterface
+class UsingMinHeap  implements KMinInterface
 {
+
+    use ArrayHelper;
 
     /**
      * @param array $a

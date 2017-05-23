@@ -1,10 +1,15 @@
 <?php
+
 namespace Algorithms\Sorting;
+
+
 /**
- * Class SortAbstract
+ * Trait ArrayHelper
+ * @package Algorithms\Sorting
  */
-abstract class SortAbstract
+trait ArrayHelper
 {
+
     /**
      * @param array $a
      * @param int $i

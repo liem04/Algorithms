@@ -5,9 +5,10 @@ namespace Algorithms\Sorting;
 /**
  * Class HeapSort
  */
-class HeapSort extends SortAbstract
+class HeapSort
 {
-
+    use ArrayHelper;
+    
     /**
      * @param int $i
      *

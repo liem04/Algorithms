@@ -6,6 +6,9 @@ namespace Algorithms\Sorting;
  */
 class RandomizedQuickSort extends QuickSortAbstract
 {
+
+    use ArrayHelper;
+
     /**
      * @param array $a
      * @param int $p
