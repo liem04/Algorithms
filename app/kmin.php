@@ -10,13 +10,12 @@ use Algorithms\KMin\UsingSelect;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $fileReader = new FileReader();
-list($a, $k) = $fileReader->read(__DIR__ . '/input.txt');
 
 $methods = [
-    'MinHeap         ' => new UsingMinHeap(),
-    'HeapSort        ' => new UsingHeapSort(),
-    'RandomizedSelect' => new UsingRandomizedSelect(),
-    'Select          ' => new UsingSelect()
+    'MinHeap          ' => new UsingMinHeap(),
+    'HeapSort         ' => new UsingHeapSort(),
+    'RandomizedSelect ' => new UsingRandomizedSelect(),
+    'Select           ' => new UsingSelect()
 ];
 
 /**
@@ -24,6 +23,7 @@ $methods = [
  * @var KMinInterface $method
  */
 foreach ($methods as $name => $method) {
+    list($a, $k) = $fileReader->read(__DIR__ . '/input.txt');
     $timeStart = microtime(true);
     $kmin = $method->solve($a, $k);
     $timeEnd = microtime(true);

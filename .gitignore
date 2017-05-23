@@ -1,6 +1,6 @@
 /vendor
-.gitignore
 .idea/Algorithms.iml
 .idea/modules.xml
 .idea/workspace.xml
 app/input.txt
+.idea/codeStyleSettings.xml

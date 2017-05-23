@@ -10,4 +10,4 @@ function generateInput($n, $k)
     fclose($inputFile);
 }
 
-generateInput(100000, 30);
+generateInput(10, 10);
