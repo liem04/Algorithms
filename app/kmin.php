@@ -18,7 +18,6 @@ $methods = [
     'Select          ' => new UsingSelect()
 ];
 foreach ($methods as $name => $method) {
-    //Using MinHeap
     $timeStart = microtime(true);
     $kmin = $method->solve($a, $k);
     $timeEnd = microtime(true);
