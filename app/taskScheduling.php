@@ -115,3 +115,5 @@ for ($i = 0; $i < $size; $i++) {
 
 $result = array_merge($earlyTasks, $lateTasks);
 writeOutput($result);
+
+echo 'Done! Write result to output.txt';
