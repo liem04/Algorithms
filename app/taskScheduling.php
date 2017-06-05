@@ -93,10 +93,10 @@ function writeOutput(array $result)
 
 list($deadlines, $penalties) = readFileInput('input.txt');
 $tasks = array_keys($penalties);
-$result = [];
-$resultIndexes = [];
+
+$earlyTasks = [];
 $lateTasks = [];
-$resultDeadlines = [];
+$earlyDeadlines = [];
 $size = count($penalties);
 for ($i = 0; $i < $size; $i++) {
     buildMaxHeap($penalties, $tasks, count($penalties));
@@ -105,13 +105,13 @@ for ($i = 0; $i < $size; $i++) {
     array_pop($penalties);
     $taskIndex = array_pop($tasks);
     $deadline = $deadlines[$taskIndex];
-    $maxDeadline = max($deadline, end($resultDeadlines));
-    if ($maxDeadline >= count($resultIndexes) + 1) {
-        insert($resultDeadlines, $resultIndexes, $deadline, $taskIndex);
+    $maxDeadline = max($deadline, end($earlyDeadlines));
+    if ($maxDeadline >= count($earlyTasks) + 1) {
+        insert($earlyDeadlines, $earlyTasks, $deadline, $taskIndex);
     } else {
         $lateTasks[] = $taskIndex;
     }
 }
 
-$result = array_merge($resultIndexes, $lateTasks);
+$result = array_merge($earlyTasks, $lateTasks);
 writeOutput($result);
