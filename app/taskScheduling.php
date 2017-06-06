@@ -121,14 +121,13 @@ function greedy(array $deadlines, array $penalties)
 
 function checkNoLateTask(array $sortedDeadLines)
 {
-    $noLate = true;
     $size = count($sortedDeadLines);
     for ($i = 0; $i < $size; $i++) {
         if ($sortedDeadLines[$i] < $i + 1) {
-            $noLate = false;
+            return false;
         }
     }
-    return $noLate;
+    return true;
 }
 
 
