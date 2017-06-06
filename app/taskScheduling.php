@@ -83,7 +83,7 @@ function insert(array &$a, array &$indexes, $value, $index)
 
 function writeOutput(array $result)
 {
-    $result = array_map(function($item) {
+    $result = array_map(function ($item) {
         return $item = $item + 1;
     }, $result);
     $handler = fopen('output.txt', 'w') or die('Unable to open file!');
@@ -91,29 +91,33 @@ function writeOutput(array $result)
     fclose($handler);
 }
 
-list($deadlines, $penalties) = readFileInput('input.txt');
-$tasks = array_keys($penalties);
-
-$earlyTasks = [];
-$lateTasks = [];
-$earlyDeadlines = [];
-$size = count($penalties);
-for ($i = 0; $i < $size; $i++) {
-    buildMaxHeap($penalties, $tasks, count($penalties));
-    exchange($penalties, 0, count($penalties) - 1);
-    exchange($tasks, 0, count($tasks) - 1);
-    array_pop($penalties);
-    $taskIndex = array_pop($tasks);
-    $deadline = $deadlines[$taskIndex];
-    $maxDeadline = max($deadline, end($earlyDeadlines));
-    if ($maxDeadline >= count($earlyTasks) + 1) {
-        insert($earlyDeadlines, $earlyTasks, $deadline, $taskIndex);
-    } else {
-        $lateTasks[] = $taskIndex;
+function greedy(array $deadlines, array $penalties)
+{
+    $tasks = array_keys($penalties);
+    $earlyTasks = [];
+    $lateTasks = [];
+    $earlyDeadlines = [];
+    $size = count($penalties);
+    for ($i = 0; $i < $size; $i++) {
+        buildMaxHeap($penalties, $tasks, count($penalties));
+        exchange($penalties, 0, count($penalties) - 1);
+        exchange($tasks, 0, count($tasks) - 1);
+        array_pop($penalties);
+        $taskIndex = array_pop($tasks);
+        $deadline = $deadlines[$taskIndex];
+        $maxDeadline = max($deadline, end($earlyDeadlines));
+        if ($maxDeadline >= count($earlyTasks) + 1) {
+            insert($earlyDeadlines, $earlyTasks, $deadline, $taskIndex);
+        } else {
+            $lateTasks[] = $taskIndex;
+        }
     }
+
+    return array_merge($earlyTasks, $lateTasks);
 }
 
-$result = array_merge($earlyTasks, $lateTasks);
-writeOutput($result);
 
+list($deadlines, $penalties) = readFileInput('input.txt');
+$result = greedy($deadlines, $penalties);
+writeOutput($result);
 echo 'Done! Write result to output.txt';
