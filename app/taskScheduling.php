@@ -95,8 +95,10 @@ function greedy(array $deadlines, array $penalties)
 {
     $tasks = array_keys($penalties);
     $earlyTasks = [];
-    $lateTasks = [];
     $earlyDeadlines = [];
+    $lateTasks = [];
+    $sortedDeadLines = [];
+    $sortedTasks = [];
     $size = count($penalties);
     for ($i = 0; $i < $size; $i++) {
         buildMaxHeap($penalties, $tasks, count($penalties));
@@ -105,10 +107,11 @@ function greedy(array $deadlines, array $penalties)
         array_pop($penalties);
         $taskIndex = array_pop($tasks);
         $deadline = $deadlines[$taskIndex];
-        $maxDeadline = max($deadline, end($earlyDeadlines));
-        if ($maxDeadline >= count($earlyTasks) + 1) {
+        insert($sortedDeadLines, $sortedTasks, $deadline, $taskIndex);
+        if (checkNoLateTask($sortedDeadLines)) {
             insert($earlyDeadlines, $earlyTasks, $deadline, $taskIndex);
         } else {
+            $sortedDeadLines = $earlyDeadlines;
             $lateTasks[] = $taskIndex;
         }
     }
@@ -116,8 +119,22 @@ function greedy(array $deadlines, array $penalties)
     return array_merge($earlyTasks, $lateTasks);
 }
 
+function checkNoLateTask(array $sortedDeadLines)
+{
+    $noLate = true;
+    $size = count($sortedDeadLines);
+    for ($i = 0; $i < $size; $i++) {
+        if ($sortedDeadLines[$i] < $i + 1) {
+            $noLate = false;
+        }
+    }
+    return $noLate;
+}
+
 
 list($deadlines, $penalties) = readFileInput('input.txt');
+$start = microtime(true);
 $result = greedy($deadlines, $penalties);
+echo 'Time: ' . (microtime(true) - $start) . PHP_EOL;
 writeOutput($result);
-echo 'Done! Write result to output.txt';
+echo 'Done! Write result to output.txt' . PHP_EOL;
