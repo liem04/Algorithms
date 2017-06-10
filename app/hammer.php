@@ -1,24 +1,5 @@
 <?php
 
-
-/**
- * Class MinHeightAnimalsQueue
- */
-class MinHeightAnimalsQueue extends SplPriorityQueue
-{
-
-    /**
-     * @param mixed $height1
-     * @param mixed $height2
-     * @return int
-     */
-    public function compare($height1, $height2)
-    {
-        if ($height1 === $height2) return 0;
-        return $height1 > $height2 ? -1 : 1;
-    }
-}
-
 /**
  * @param string $filePath
  * @return array
@@ -72,19 +53,6 @@ function saveToOutput(array $result, string $output)
     fwrite($handler, implode(' ', $result['index']));
     fclose($handler);
 }
-
-/**
- * @param array $a
- * @param int $i
- * @param int $j
- */
-function exchange(array &$a, int $i, int $j)
-{
-    $tmp = $a[$i];
-    $a[$i] = $a[$j];
-    $a[$j] = $tmp;
-}
-
 
 /**
  * @param array $animals
@@ -149,7 +117,6 @@ function tapSmallestHeightAnimal(array &$canTapAnimals, array &$result)
         $canTapAnimals[0] = $smallestHeight;
     }
 }
-
 
 /**
  * @param array $animals
