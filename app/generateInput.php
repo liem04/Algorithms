@@ -14,4 +14,4 @@ function generateInput($n)
     fclose($inputFile);
 }
 
-generateInput(10);
+generateInput(100);

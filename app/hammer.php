@@ -40,6 +40,14 @@ function readFileInput(string $filePath): array
     }
     fclose($handle);
 
+    array_walk($appearedTimes, function (&$item) {
+        $item = (int)$item;
+    });
+
+    array_walk($heights, function (&$item) {
+        $item = (int)$item;
+    });
+
     $animals = [];
     for ($i = 0; $i < count($heights); $i++) {
         $animals[] = [
@@ -66,6 +74,19 @@ function saveToOutput(array $result, string $output)
 }
 
 /**
+ * @param array $a
+ * @param int $i
+ * @param int $j
+ */
+function exchange(array &$a, int $i, int $j)
+{
+    $tmp = $a[$i];
+    $a[$i] = $a[$j];
+    $a[$j] = $tmp;
+}
+
+
+/**
  * @param array $animals
  */
 function sortAnimalsByAppearedTime(array &$animals)
@@ -79,36 +100,53 @@ function sortAnimalsByAppearedTime(array &$animals)
 }
 
 /**
- * @param SplPriorityQueue $canTapAnimals
+ * @param array $canTapAnimals
+ * @param array $newAnimal
+ */
+function insertToSortedByHeight(array &$canTapAnimals, array $newAnimal)
+{
+    $canTapAnimals[] = $newAnimal;
+    $j = count($canTapAnimals) - 2;
+
+    while ($j >= 0 && $canTapAnimals[$j]['height'] > $newAnimal['height']) {
+        $canTapAnimals[$j + 1] = $canTapAnimals[$j];
+        $j = $j - 1;
+    }
+    $canTapAnimals[$j + 1] = $newAnimal;
+}
+
+/**
+ * @param array $canTapAnimals
  * @param array $animals
  * @param int $index
  * @param int $lastIndex
  */
-function reloadCanTapAnimals(SplPriorityQueue $canTapAnimals, array $animals, int $index, int &$lastIndex)
+function reloadCanTapAnimals(array &$canTapAnimals, array $animals, int $index, int &$lastIndex)
 {
     while ($lastIndex < count($animals) && $animals[$lastIndex]['appeared'] <= $index + 1) {
-        $canTapAnimals->insert($animals[$lastIndex], $animals[$lastIndex]['height']);
+        insertToSortedbyHeight($canTapAnimals, $animals[$lastIndex]);
         $lastIndex++;
     }
 }
 
 /**
- * @param SplPriorityQueue $canTapAnimals
+ * @param array $canTapAnimals
  * @param array $result
  */
-function tapSmallestHeightAnimal(SplPriorityQueue &$canTapAnimals, array &$result)
+function tapSmallestHeightAnimal(array &$canTapAnimals, array &$result)
 {
-    if ($canTapAnimals->count() === 0) {
+    if (count($canTapAnimals) === 0) {
         $result['index'][] = 0;
         return;
     }
-    $smallestHeight = $canTapAnimals->extract();
+    $smallestHeight = $canTapAnimals[0];
     $result['index'][] = $smallestHeight['index'];
     if ((int)$smallestHeight['height'] === 1) {
+        array_shift($canTapAnimals);
         $result['cost'][] = count($result['index']);
     } else {
         $smallestHeight['height'] = $smallestHeight['height'] - 1;
-        $canTapAnimals->insert($smallestHeight, $smallestHeight['height'] - 1);
+        $canTapAnimals[0] = $smallestHeight;
     }
 }
 
@@ -121,7 +159,7 @@ function hammerSolver(array $animals): array
 {
     sortAnimalsByAppearedTime($animals);
     $result = [];
-    $canTapAnimals = new MinHeightAnimalsQueue();
+    $canTapAnimals = [];
     $index = 0;
     $lastCanTapAnimalIndex = 0;
     $numberSolved = 0;
