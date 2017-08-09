@@ -76,7 +76,7 @@ $data = [
     [[6, 1, 4], [1, false]], // có 1 số đúng nhưng sai thứ tự
     [[2, 0, 6], [2, false]], // có 2 số đúng nhưng sai thứ tự
     [[7, 3, 8], [0, false]], // 0 số nào đúng
-    [[8, 8, 0], [1, false]], // 1 số đúng nhưng sai thứ tự
+    [[7, 8, 0], [1, false]], // 1 số đúng nhưng sai thứ tự
 ];
 
 $result = check($data);
